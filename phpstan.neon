@@ -1,2 +1,6 @@
 parameters:
     ignoreErrors:
+        - '#Casting to .+ something that.s already .+\.#'
+        - '#Access to an undefined property Zend_Session_Namespace::\$.+\.#'
+        - '#Strict comparison using === between int and null will always evaluate to false\.#'
+        - '#Parameter \#3 \$percent of method Zend_ProgressBar_Adapter::notify\(\) expects float, false\|float given\.#'
