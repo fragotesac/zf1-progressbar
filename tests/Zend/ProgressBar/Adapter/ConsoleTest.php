@@ -20,12 +20,7 @@
  * @version    $Id$
  */
 
-/**
- * Zend_ProgressBar_Adapter_Console
- */
-require_once 'Zend/ProgressBar/Adapter/Console.php';
-
-require_once 'MockupStream.php';
+require_once __DIR__ . '/MockupStream.php';
 
 /**
  * @category   Zend

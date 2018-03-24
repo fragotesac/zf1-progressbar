@@ -20,15 +20,6 @@
  * @version    $Id$
  */
 
-/**
- * Zend_ProgressBar
- */
-require_once 'Zend/ProgressBar.php';
-
-/**
- * Zend_ProgressBar_Adapter
- */
-require_once 'Zend/ProgressBar/Adapter.php';
 
 /**
  * @category   Zend

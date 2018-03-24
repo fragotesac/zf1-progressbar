@@ -20,10 +20,6 @@
  * @version    $Id$
  */
 
-/**
- * Zend_ProgressBar_Adapter_JsPush
- */
-require_once 'Zend/ProgressBar/Adapter/JsPush.php';
 
 /**
  * @category   Zend

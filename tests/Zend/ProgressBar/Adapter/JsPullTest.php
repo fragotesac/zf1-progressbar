@@ -20,10 +20,6 @@
  * @version    $Id$
  */
 
-/**
- * Zend_ProgressBar_Adapter_JsPull
- */
-require_once 'Zend/ProgressBar/Adapter/JsPull.php';
 
 /**
  * @category   Zend
