@@ -240,12 +240,9 @@ class Zend_ProgressBar_Adapter_ConsoleTest extends PHPUnit\Framework\TestCase
     }
 
     public function testSetOutputStreamOpenFail() {
-        try {
-            $adapter = new Zend_ProgressBar_Adapter_Console();
-            $adapter->setOutputStream(null);
-            $this->fail('Expected Zend_ProgressBar_Adapter_Exception');
-        } catch (Zend_ProgressBar_Adapter_Exception $e) {
-        }
+        $this->expectException(Zend_ProgressBar_Adapter_Exception::class);
+        $adapter = new Zend_ProgressBar_Adapter_Console();
+        $adapter->setOutputStream(null);
     }
 
     public function testSetOutputStreamReplaceStream() {
