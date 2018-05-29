@@ -170,7 +170,6 @@ class Zend_ProgressBar_Adapter_MockUp extends Zend_ProgressBar_Adapter
 
     public function finish()
     {
-
     }
 
     public function getCurrent()

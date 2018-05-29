@@ -32,10 +32,9 @@ require_once __DIR__ . '/MockupStream.php';
  */
 class Zend_ProgressBar_Adapter_ConsoleTest extends PHPUnit\Framework\TestCase
 {
-
     protected function setUp()
     {
-        stream_wrapper_register("zendprogressbaradapterconsole", "Zend_ProgressBar_Adapter_Console_MockupStream");
+        stream_wrapper_register('zendprogressbaradapterconsole', 'Zend_ProgressBar_Adapter_Console_MockupStream');
     }
 
     protected function tearDown()
@@ -147,7 +146,7 @@ class Zend_ProgressBar_Adapter_ConsoleTest extends PHPUnit\Framework\TestCase
 
     public function testCustomOrder()
     {
-        $adapter = new Zend_ProgressBar_Adapter_Console_Stub(array('width' => 25, 'elements' =>  array(Zend_ProgressBar_Adapter_Console::ELEMENT_ETA,
+        $adapter = new Zend_ProgressBar_Adapter_Console_Stub(array('width' => 25, 'elements' => array(Zend_ProgressBar_Adapter_Console::ELEMENT_ETA,
                                                                                                        Zend_ProgressBar_Adapter_Console::ELEMENT_PERCENT,
                                                                                                        Zend_ProgressBar_Adapter_Console::ELEMENT_BAR)));
         $adapter->notify(0, 100, 0, 0, null, null);
@@ -233,19 +232,22 @@ class Zend_ProgressBar_Adapter_ConsoleTest extends PHPUnit\Framework\TestCase
         $this->assertContains('foobar     [', $adapter->getLastOutput());
     }
 
-    public function testSetOutputStreamOpen() {
+    public function testSetOutputStreamOpen()
+    {
         $adapter = new Zend_ProgressBar_Adapter_Console();
         $adapter->setOutputStream('zendprogressbaradapterconsole://test1');
         $this->assertArrayHasKey('test1', Zend_ProgressBar_Adapter_Console_MockupStream::$tests);
     }
 
-    public function testSetOutputStreamOpenFail() {
+    public function testSetOutputStreamOpenFail()
+    {
         $this->expectException(Zend_ProgressBar_Adapter_Exception::class);
         $adapter = new Zend_ProgressBar_Adapter_Console();
         $adapter->setOutputStream(null);
     }
 
-    public function testSetOutputStreamReplaceStream() {
+    public function testSetOutputStreamReplaceStream()
+    {
         $adapter = new Zend_ProgressBar_Adapter_Console();
         $adapter->setOutputStream('zendprogressbaradapterconsole://test2');
         $this->assertArrayHasKey('test2', Zend_ProgressBar_Adapter_Console_MockupStream::$tests);
@@ -254,7 +256,8 @@ class Zend_ProgressBar_Adapter_ConsoleTest extends PHPUnit\Framework\TestCase
         $this->assertArrayNotHasKey('test2', Zend_ProgressBar_Adapter_Console_MockupStream::$tests);
     }
 
-    public function testgetOutputStream() {
+    public function testgetOutputStream()
+    {
         $adapter = new Zend_ProgressBar_Adapter_Console();
         $adapter->setOutputStream('zendprogressbaradapterconsole://test4');
         $resource = $adapter->getOutputStream();
@@ -262,20 +265,23 @@ class Zend_ProgressBar_Adapter_ConsoleTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('Hello Word!', Zend_ProgressBar_Adapter_Console_MockupStream::$tests['test4']);
     }
 
-    public function testgetOutputStreamReturnigStdout() {
-        $adapter = new Zend_ProgressBar_Adapter_Console();
+    public function testgetOutputStreamReturnigStdout()
+    {
+        $adapter  = new Zend_ProgressBar_Adapter_Console();
         $resource = $adapter->getOutputStream();
         $this->assertInternalType('resource', $resource);
     }
 
-    public function testFinishEol() {
+    public function testFinishEol()
+    {
         $adapter = new Zend_ProgressBar_Adapter_Console();
         $adapter->setOutputStream('zendprogressbaradapterconsole://test5');
         $adapter->finish();
         $this->assertEquals(PHP_EOL, Zend_ProgressBar_Adapter_Console_MockupStream::$tests['test5']);
     }
 
-    public function testFinishNone() {
+    public function testFinishNone()
+    {
         $adapter = new Zend_ProgressBar_Adapter_Console();
         $adapter->setOutputStream('zendprogressbaradapterconsole://test7');
         $adapter->setFinishAction(Zend_ProgressBar_Adapter_Console::FINISH_ACTION_NONE);
@@ -283,7 +289,8 @@ class Zend_ProgressBar_Adapter_ConsoleTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('', Zend_ProgressBar_Adapter_Console_MockupStream::$tests['test7']);
     }
 
-    public function testSetBarLeftChar() {
+    public function testSetBarLeftChar()
+    {
         try {
             $adapter = new Zend_ProgressBar_Adapter_Console();
             $adapter->setBarLeftChar(null);
@@ -293,7 +300,8 @@ class Zend_ProgressBar_Adapter_ConsoleTest extends PHPUnit\Framework\TestCase
         }
     }
 
-    public function testSetBarRightChar() {
+    public function testSetBarRightChar()
+    {
         try {
             $adapter = new Zend_ProgressBar_Adapter_Console();
             $adapter->setBarRightChar(null);
@@ -303,7 +311,8 @@ class Zend_ProgressBar_Adapter_ConsoleTest extends PHPUnit\Framework\TestCase
         }
     }
 
-    public function testSetInvalidFinishAction() {
+    public function testSetInvalidFinishAction()
+    {
         try {
             $adapter = new Zend_ProgressBar_Adapter_Console();
             $adapter->setFinishAction('CUSTOM_FINISH_ACTION');
@@ -312,7 +321,6 @@ class Zend_ProgressBar_Adapter_ConsoleTest extends PHPUnit\Framework\TestCase
             $this->assertEquals($e->getMessage(), 'Invalid finish action specified');
         }
     }
-
 }
 
 class Zend_ProgressBar_Adapter_Console_Stub extends Zend_ProgressBar_Adapter_Console

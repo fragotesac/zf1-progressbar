@@ -98,7 +98,6 @@ class Zend_ProgressBar
 
         // See if we have to open a session namespace
         if ($persistenceNamespace !== null) {
-
             $this->_persistenceNamespace = new Zend_Session_Namespace($persistenceNamespace);
         }
 
