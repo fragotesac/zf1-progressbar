@@ -161,7 +161,7 @@ class Zend_ProgressBar
 
         // Calculate percent
         if ($this->_min === $this->_max) {
-            $percent = false;
+            $percent = .0;
         } else {
             $percent = (float) ($this->_current - $this->_min) / ($this->_max - $this->_min);
         }
@@ -169,10 +169,10 @@ class Zend_ProgressBar
         // Calculate ETA
         $timeTaken = time() - $this->_startTime;
 
-        if ($percent === .0 || $percent === false) {
+        if ($percent === .0) {
             $timeRemaining = null;
         } else {
-            $timeRemaining = round(((1 / $percent) * $timeTaken) - $timeTaken);
+            $timeRemaining = (int) round(((1 / $percent) * $timeTaken) - $timeTaken);
         }
 
         // Poll the adapter

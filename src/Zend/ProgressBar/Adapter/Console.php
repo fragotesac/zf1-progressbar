@@ -199,7 +199,11 @@ class Zend_ProgressBar_Adapter_Console extends Zend_ProgressBar_Adapter
     {
         if ($this->_outputStream === null) {
             if (!defined('STDOUT')) {
-                $this->_outputStream = fopen('php://stdout', 'w');
+                $stream = fopen('php://stdout', 'w');
+                if ($stream === false) {
+                    throw new Zend_ProgressBar_Adapter_Exception('Unable to open stream');
+                }
+                $this->_outputStream = $stream;
             } else {
                 return STDOUT;
             }
@@ -228,9 +232,9 @@ class Zend_ProgressBar_Adapter_Console extends Zend_ProgressBar_Adapter
                 $this->_width = 80;
 
                 // Try to determine the width through stty
-                if (preg_match('#\d+ (\d+)#', @shell_exec('stty size'), $match) === 1) {
+                if (preg_match('#\d+ (\d+)#', (string) @shell_exec('stty size'), $match) === 1) {
                     $this->_width = (int) $match[1];
-                } elseif (preg_match('#columns = (\d+);#', @shell_exec('stty'), $match) === 1) {
+                } elseif (preg_match('#columns = (\d+);#', (string) @shell_exec('stty'), $match) === 1) {
                     $this->_width = (int) $match[1];
                 }
             }
@@ -371,7 +375,7 @@ class Zend_ProgressBar_Adapter_Console extends Zend_ProgressBar_Adapter
      * @param  float   $max           Max progress value
      * @param  float   $percent       Current percent value
      * @param  integer $timeTaken     Taken time in seconds
-     * @param  integer $timeRemaining Remaining time in seconds
+     * @param  integer|null $timeRemaining Remaining time in seconds
      * @param  string  $text          Status text
      * @return void
      */
@@ -398,14 +402,22 @@ class Zend_ProgressBar_Adapter_Console extends Zend_ProgressBar_Adapter
 
                     $doneWidth = min($visualWidth - $indicatorWidth, round($visualWidth * $percent));
                     if ($doneWidth > 0) {
-                        $bar .= substr(str_repeat($this->_barLeftChar, ceil($doneWidth / strlen($this->_barLeftChar))), 0, $doneWidth);
+                        $bar .= substr(
+                            str_repeat($this->_barLeftChar, (int) ceil($doneWidth / strlen($this->_barLeftChar))),
+                            0,
+                            (int) $doneWidth
+                        );
                     }
 
                     $bar .= $this->_barIndicatorChar;
 
                     $leftWidth = $visualWidth - $doneWidth - $indicatorWidth;
                     if ($leftWidth > 0) {
-                        $bar .= substr(str_repeat($this->_barRightChar, ceil($leftWidth / strlen($this->_barRightChar))), 0, $leftWidth);
+                        $bar .= substr(
+                            str_repeat($this->_barRightChar, (int) ceil($leftWidth / strlen($this->_barRightChar))),
+                            0,
+                            (int) $leftWidth
+                        );
                     }
 
                     $bar .= ']';
@@ -414,7 +426,7 @@ class Zend_ProgressBar_Adapter_Console extends Zend_ProgressBar_Adapter
                     break;
 
                 case self::ELEMENT_PERCENT:
-                    $renderedElements[] = str_pad(round($percent * 100), 3, ' ', STR_PAD_LEFT) . '%';
+                    $renderedElements[] = str_pad((string) round($percent * 100), 3, ' ', STR_PAD_LEFT) . '%';
                     break;
 
                 case self::ELEMENT_ETA:
