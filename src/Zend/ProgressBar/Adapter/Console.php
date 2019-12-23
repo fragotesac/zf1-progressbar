@@ -173,7 +173,7 @@ class Zend_ProgressBar_Adapter_Console extends Zend_ProgressBar_Adapter
      * Set a different output-stream
      *
      * @param  string $resource
-     * @return Zend_ProgressBar_Adapter_Console
+     * @return void
      */
     public function setOutputStream($resource)
     {
@@ -340,6 +340,7 @@ class Zend_ProgressBar_Adapter_Console extends Zend_ProgressBar_Adapter
      * Set the charset of the text element
      *
      * @param string $charset
+     * @return void
      */
     public function setCharset($charset)
     {

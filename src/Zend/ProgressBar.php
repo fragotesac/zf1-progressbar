@@ -182,6 +182,7 @@ class Zend_ProgressBar
     /**
      * Update the progressbar to the next value
      *
+     * @param  int $diff
      * @param  string $text
      * @return void
      */
