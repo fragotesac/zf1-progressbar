@@ -1,6 +1,6 @@
 Zend Framework 1 - ProgressBar
 ============================
-[![Build Status](https://travis-ci.org/diablomedia/zf1-progressbar.svg?branch=master)](https://travis-ci.org/diablomedia/zf1-progressbar)
+[![Build Status](https://travis-ci.com/diablomedia/zf1-progressbar.svg?branch=master)](https://travis-ci.com/diablomedia/zf1-progressbar)
 [![codecov](https://codecov.io/gh/diablomedia/zf1-progressbar/branch/master/graph/badge.svg)](https://codecov.io/gh/diablomedia/zf1-progressbar)
 [![Latest Stable Version](https://poser.pugx.org/diablomedia/zendframework1-progressbar/v/stable)](https://packagist.org/packages/diablomedia/zendframework1-progressbar)
 [![Total Downloads](https://poser.pugx.org/diablomedia/zendframework1-progressbar/downloads)](https://packagist.org/packages/diablomedia/zendframework1-progressbar)
